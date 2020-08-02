@@ -5,18 +5,18 @@ The sorting algorithms are a very interesting part of the Data Structures and Al
 
 ## Bubble Sort
 
-The Bubble Sort is an exchanging algorithm. In Bubble Sort, the ordination happens as the __algorithm iterates through the array comparing the adjacent elements, if the current is in the incorrect position, it must swap with the next one__, else, the loop goes to the following comparison. This __procedure finishes when there are no more elements to swap__ it means that the array is sorted.
+The Bubble Sort is an _exchanging_ algorithm. In Bubble Sort, the ordination happens as the __algorithm iterates through the array comparing the adjacent elements, if the current is in the incorrect position, it must swap with the next one__, else, the loop goes to the following comparison. This __procedure finishes when there are no more elements to swap__ it means that the array sorted.
 
-The process happens with __two loops__: the first one controls if there is still swap to make; the other one makes the comparisons between the elements. In each iteration __the biggest (or smallest, it depends if the order is ascending or descending) element of the array goes to its right position__ as if it was "floating" like a bubble, which is why the algorithm's name is Bubble Sort.
+The process happens with __two loops__: the first one controls if there is still swap to make; the other one makes the comparisons between the elements. In each iteration, __the biggest (or the smallest, it depends if the order is ascending or descending) one goes to its right position__ as if it was "floating" like a bubble, which is why the algorithm's name is Bubble Sort.
 
 This method is a simple way to think when it comes to sorting, though, it's not efficient for a large amount of data.
 
-> In terms of performance:
+> In terms of time performance:
 >    * Better case: O(N)
 >    * Average case: O(N²)
 >    * Worst case: O(N²)
 
-Down below is one possibility for the implementation of the Bubble Sort in C
+Down below is one possibility for the implementation of the Bubble Sort algorithm in C
 
 ```
 void bubbleSort(int arr[], int n){
@@ -47,6 +47,54 @@ void bubbleSort(int arr[], int n){
 
 ### Let's see an example of an ascending ordination:</br>
 ![BubbleSort](img/BubbleSort.png)
+
+
+## Selection Sort
+
+The Selection Sort (as the name says) is a _selection_ algorithm. In Selection Sort, __the premise is: the algorithm takes the first element of the array and compares it with all the other that follow when it finds the smallest (or the biggest one, it depends if the order is ascending or descending) element, it swaps them,  if it does not find a smaller one it keeps the same starting array order__. Then it goes to the next iteration and does the same thing with the second element. __The process finishes when the penultimate reaches and compared with the last one.__
+
+The process uses __two loops__, the first one iterates over all the elements in the array, marking the current element's position as the position of the minimum element; the second one checks if this element is bigger (or smaller, it depends if the order is ascending or descending) than the following ones in the array. __When it finds a smaller one, it stores its position as the minimum's position and keeps doing this process until it reaches the last array's element. When it reaches the last one, it checks if the minimum's position is different from the starting position stored. If so, it swaps the element in the starting position with the one in the minimum's position.__
+
+This method is not efficient for a large amount of data, though it is faster than the Bubble Sort.
+
+> In terms of time performance:
+>    * Better case: O(N²)
+>    * Average case: O(N²)
+>    * Worst case: O(N²)
+
+Down below is the implementation of the Selection Sort algorithm in C
+```
+void selectionSort(int arr[], int n){
+    int i;
+    int j;
+    int min_pos;
+    int tmp;
+
+    // loop to mark the current element position
+    for(i = 0; i < n-1; i++){
+        // assuming that the current element is the minimum element of the sequence
+        min_pos = i;
+        // loop to make the comparisons between the current element and the other elements
+        for(j = i+1; j < n; j++){ 
+            // checks if the current element if smaller than the following ones
+            if(arr[j] < arr[min_pos]){
+                min_pos = j;
+            }
+        }
+        // checks if the minimum element position if diffrent from the current element position
+        if(min_pos != i){
+            // swaping positions
+            tmp = arr[i];
+            arr[i] = arr[min_pos];
+            arr[min_pos] = tmp;
+        }
+    }
+}
+```
+
+### Let's see an example of an ascending ordination:</br>
+![SelectionSort](img/SelectionSort.png)
+
 
 ## References:
 

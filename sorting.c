@@ -68,6 +68,7 @@ void bubbleSort(int arr[], int n){
 
 }
 
+// Here's the implementation of Selection Sort in C
 void selectionSort(int arr[], int n){
     int i;
     int j;
