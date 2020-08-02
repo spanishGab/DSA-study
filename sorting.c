@@ -2,37 +2,29 @@
 #include <stdlib.h>
 #include <time.h>
 
-/* 
-   The bubble sort is a pair-comparing algorithm. It means that the ordination hapens
-   as the algorithim iterates through the array comparing the adjacent elements. If the
-   first element is grater than the second, they must swap their positions, else, the loop
-   goes to the next comparison. This procedure is finished when there's no more elements to
-   swap positions, this means that the array is sorted.
-
-   The porocess hapens with two loops, the first one to control the iteration's last position and 
-   the other one is to make the comparisons. In each iterration the biggest element of the array goes
-   to the final position (if the sorting is in ascending order), as if it was "floating" like a bubble, 
-   wich is why the algorithm's name is Bubble Sort
-*/
-
 // Here's the implementation of Bubble Sort in C
 void bubbleSort(int arr[], int n){
-    int lst_pos, j;
+    int lst_comp;
+    int end = n;
+    int i;
     int tmp;
 
-    // loop to control the iteration's last position (where the second loop must stop)
-    for(lst_pos = 0; lst_pos < n-1; lst_pos++){
+    // loop that iterates until there's no more swap to make in the array
+    do{
+        lst_comp = 0;
         // loop to make the comparisons between the adjacent elements
-        for(j = 0; j < n-lst_pos-1; j++){
+        for(i = 0; i < end-1; i++){
             // the actual comparison (to make it in descending order change '>' to '<')
-            if(arr[j] > arr[j+1]){
+            if(arr[i] > arr[i+1]){
                 // swaping positions
-                tmp = arr[j];
-                arr[j] = arr[j+1];
-                arr[j+1] = tmp;
+                tmp = arr[i];
+                arr[i] = arr[i+1];
+                arr[i+1] = tmp;
+                lst_comp = i;
             }
         }
-    }
+        end--;
+    }while(lst_comp != 0);
 
 }
 
