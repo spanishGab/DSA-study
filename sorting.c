@@ -6,6 +6,7 @@
 void testMethod(int [], int n, int method);
 void bubbleSort(int [], int n);
 void selectionSort(int [], int n);
+void insertionSort(int [], int n);
 
 int main(){
     srand(time(0));
@@ -18,6 +19,7 @@ int main(){
     printf("\nType the method you want to test: \n");
     printf("1 -> Bubble Sort\n");
     printf("2 -> Selection Sort\n");
+    printf("3 -> Insertion Sort\n");
     scanf("%d", &method);
 
     int * arr;
@@ -35,6 +37,9 @@ int main(){
             break;
         case 2:
             testMethod(arr, n, 2);
+            break;
+        case 3:
+            testMethod(arr, n, 3);
             break;
 
     }
@@ -75,11 +80,11 @@ void selectionSort(int arr[], int n){
     int min_pos;
     int tmp;
 
-    // loop to mark the current element position
+    // loop that marks the current element position
     for(i = 0; i < n-1; i++){
         // assuming that the current element is the minimum element of the sequence
         min_pos = i;
-        // loop to make the comparisons between the current element and the other elements
+        // loop that makes the comparisons between the current and the other elements
         for(j = i+1; j < n; j++){ 
             // checks if the current element if smaller than the following ones
             if(arr[j] < arr[min_pos]){
@@ -96,11 +101,28 @@ void selectionSort(int arr[], int n){
     }
 }
 
+// Here's the implementation of Selection Sort in C
+void insertionSort(int arr[], int n){
+    int i;
+    int j;
+    int tmp;
+
+    for(i = 1; i < n; i++){
+        tmp = arr[i];   
+        for(j = i; (j > 0) && (tmp < arr[j-1]); j--){    
+            arr[j] = arr[j-1];
+        }
+        arr[j] = tmp;
+        
+    }
+}
+
 
 void testMethod(int arr[], int n, int method){
     time_t start_t, end_t;
     double time_taken;
     clock_t CPU_time_start, CPU_time_end;
+    int i;
 
 
     if(method == 1){
@@ -109,7 +131,7 @@ void testMethod(int arr[], int n, int method){
         clock_t CPU_time_end = clock();
         
         printf("\nBubble Sorted Array:\n");
-        for(int i = 0; i < n; i++){
+        for(i = 0; i < n; i++){
             printf("%d ", arr[i]);
         }
         // printf("\nt = %lf s\n",((double) (CPU_time_end - CPU_time_start)) / CLOCKS_PER_SEC);
@@ -120,12 +142,22 @@ void testMethod(int arr[], int n, int method){
         clock_t CPU_time_end = clock();
 
         printf("\nSelection Sorted Array:\n");
-        for(int i = 0; i < n; i++){
+        for(i = 0; i < n; i++){
             printf("%d ", arr[i]);
         }
         // printf("\nt = %lf s\n",((double) (CPU_time_end - CPU_time_start)) / CLOCKS_PER_SEC);
     }
-    
+    else if(method == 3){
+        clock_t CPU_time_start = clock();
+        insertionSort(arr, n);
+        clock_t CPU_time_end = clock();
+
+        printf("\nInsertion Sorted Array:\n");
+        for(i = 0; i < n; i++){
+            printf("%d ", arr[i]);
+        }
+        // printf("\nt = %lf s\n",((double) (CPU_time_end - CPU_time_start)) / CLOCKS_PER_SEC);
+    }
     
     
     printf("\n");

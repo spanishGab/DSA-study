@@ -16,7 +16,7 @@ This method is a simple way to think when it comes to sorting, though, it's not 
 >    * Average case: O(N²)
 >    * Worst case: O(N²)
 
-Down below is one possibility for the implementation of the Bubble Sort algorithm in C
+Down below is one possibility for the implementation of the Bubble Sort algorithm in C:
 
 ```
 void bubbleSort(int arr[], int n){
@@ -55,14 +55,14 @@ The Selection Sort (as the name says) is a _selection_ algorithm. In Selection S
 
 The process uses __two loops__, the first one iterates over all the elements in the array, marking the current element's position as the position of the minimum element; the second one checks if this element is bigger (or smaller, it depends if the order is ascending or descending) than the following ones in the array. __When it finds a smaller one, it stores its position as the minimum's position and keeps doing this process until it reaches the last array's element. When it reaches the last one, it checks if the minimum's position is different from the starting position stored. If so, it swaps the element in the starting position with the one in the minimum's position.__
 
-This method is not efficient for a large amount of data, though it is faster than the Bubble Sort.
+This method is not efficient for a large amount of data, though, it is faster than the Bubble Sort.
 
 > In terms of time performance:
 >    * Better case: O(N²)
 >    * Average case: O(N²)
 >    * Worst case: O(N²)
 
-Down below is the implementation of the Selection Sort algorithm in C
+Down below is the implementation of the Selection Sort algorithm in C:
 ```
 void selectionSort(int arr[], int n){
     int i;
@@ -95,6 +95,41 @@ void selectionSort(int arr[], int n){
 ### Let's see an example of an ascending ordination:</br>
 ![SelectionSort](img/SelectionSort.png)
 
+## Insertion Sort
+
+The Insertion Sort method (as the name says) works with the _insertion_ of elements. A good and common __analogy__ used to understand Insertion Sort is a __card deck ordination__. When sorting a cards deck, we always assume that __the first card is already sorted__, then when we check the following one, __if it's smaller than the first one, we put it right before it, and then we have two cards sorted__. If we find another unsorted card that is __smaller than the second card and bigger than the first we pass the second card ahead and put this third one right into the second's place, and so on.__ This process repeats until the end of the deck.
+
+Insertion Sort algorithm works __separating the array into two parts__: the __first__ part is the __sorted sub-array__, the __second__ one is the __unsorted sub-array__. It walks through the array and __checks if the current element is smaller than the ones on its left-hand side (the sorted sub-array).__
+
+In Insertion Sort, we have __two loops__: the first one marks the current element; __the second one iterates over the sorted sub-array while it finds elements that are smaller than the current one.__ When this situation happens, __the elements that are bigger than the current one walk one position ahead until the current one finds someone smaller than it, thus it goes to the place ahead of this element, and the next iteration comes in.__
+
+This algorithm is not efficient for a large amount of data, though, it is faster than the Selection Sort.
+
+> In terms of time performance:
+>    * Better case: O(N)
+>    * Average case: O(N²)
+>    * Worst case: O(N²)
+
+
+Down below is the implementation of the Insertion Sort algorithm in C
+```
+void insertionSort(int arr[], int n){
+    int i;
+    int j;
+    int tmp;
+
+    for(i = 1; i < n; i++){
+        tmp = arr[i];   
+        for(j = i; (j > 0) && (tmp < arr[j-1]); j--){    
+            arr[j] = arr[j-1];
+        }
+        arr[j] = tmp;
+    }
+}
+```
+
+### Let's see an example of an ascending ordination:</br>
+![Insertion Sort](img/InsertionSort.png)
 
 ## References:
 
