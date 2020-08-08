@@ -131,6 +131,88 @@ void insertionSort(int arr[], int n){
 ### Let's see an example of an ascending ordination:</br>
 ![Insertion Sort](img/InsertionSort.png)
 
+
+# Merge Sort
+
+Merge Sort algorithm uses the [Divide and Conquer](https://www.programiz.com/dsa/divide-and-conquer) strategy to sort elements. It is based on recursion also. These two things united are the power of Merge Sort. Basically what the algorithm does is to divide the array until all the elements get isolated, this means that there is only one element left in the sub-array (that's the base case of the recursion). When it has the elements divided at this level, it begins to _merge_ the sub-arrays created in the past levels.
+
+The algorithm uses two functions: mergeSort() and merge():
+
+### mergeSort():
+This function is responsible to divide the array into two parts: left and right, to do this, it calculates the _middle_ of the array and calls itself again two times, the first one passing as arguments the array, and the _left part_ indicators, and the second one passing as arguments the array, and the _right part_ indicators. When the base case is reached, the function returns. In the end, it calls the merge() function, which sorts the array.
+
+### merge(): 
+This function is responsible for sorting the array passed as an argument. To do that, it uses the _first_, the _middle_, and the _last_ position indicators passed as arguments. It creates the _left_ and _right_ references and a temporary array that will store the sorted values and then will override the main array with its values.
+
+It works with a loop that iterates over the temporary array. Inside the loop, the first thing it does is to check if there still have any element in both _left_ and _right_ sub-arrays, if so, it compares the current element in the _left_ side with the one in the _right_ side and puts the smallest one in the temporary array. If one of the arrays has no more elements to compare, then it gets the elements in the one which still has and puts them into the temporary array, because these remaining elements are already sorted. In the end, the function copies the temporary array into the main array.
+
+This is a fast algorithm, especially when it treats large amounts of data. Its negative points are that it uses recursion and creates a temporary array during the sort process.
+
+> In terms of performance:
+>    * Better case: O(N log(N))
+>    * Average case: O(N log(N))
+>    * Worst case: O(N log(N))
+
+Down below is the implementation of the Merge Sort algorithm in C
+```
+void mergeSort(int arr[], int first, int last){
+    if(first == last){
+        return;
+    }
+
+    int middle = floor((first+last) / 2);
+
+    mergeSort(arr, first, middle);
+    mergeSort(arr, middle+1, last);
+    merge(arr, first, middle, last);
+}
+
+
+void merge(int arr[], int first, int middle, int last){
+    int *tmp;
+    int i;
+    int left = first;
+    int right = middle + 1;
+    int tmp_len = last - first + 1;
+    tmp = (int *) malloc(tmp_len * sizeof(int));
+
+    if(tmp != NULL){
+        for(i = 0; i < tmp_len; i++){
+            if((left <= middle) && (right <= last)){
+                if(arr[left] < arr[right]){
+                    tmp[i] = arr[left];
+                    left++;
+                }
+                else{
+                    tmp[i] = arr[right];
+                    right++;
+                }
+            }
+            else{
+                if(left > middle){
+                    tmp[i] = arr[right];
+                    right++;
+                }
+                else{
+                    tmp[i] = arr[left];
+                    left++;
+                }
+            }
+        }
+        for(int j = 0, i = first; j < tmp_len; j++, i++){
+            arr[i] = tmp[j];
+        }
+    }
+
+    free(tmp);
+}
+
+```
+
+### Let's see an example of an ascending ordination:</br>
+![MergeSort](img/MergeSort.png)
+
+
 ## References:
 
 [LAMFO - Sorting Algorithms](https://lamfo-unb.github.io/2019/04/21/Sorting-algorithms/)</br>

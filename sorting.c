@@ -125,6 +125,7 @@ void insertionSort(int arr[], int n){
 }
 
 
+// Here's the implementation of Merge Sort in C
 void mergeSort(int arr[], int first, int last){
     if(first == last){
         return;
@@ -138,7 +139,6 @@ void mergeSort(int arr[], int first, int last){
 }
 
 
-// Here's the implementation of Merge Sort in C
 void merge(int arr[], int first, int middle, int last){
     int *tmp;
     int i;
