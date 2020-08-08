@@ -2,11 +2,14 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include <math.h>
 
 void testMethod(int [], int n, int method);
 void bubbleSort(int [], int n);
 void selectionSort(int [], int n);
 void insertionSort(int [], int n);
+void merge(int [], int first, int middle, int last);
+void mergeSort(int [], int first, int last);
 
 int main(){
     srand(time(0));
@@ -20,6 +23,7 @@ int main(){
     printf("1 -> Bubble Sort\n");
     printf("2 -> Selection Sort\n");
     printf("3 -> Insertion Sort\n");
+    printf("4 -> Merge Sort\n");
     scanf("%d", &method);
 
     int * arr;
@@ -40,6 +44,9 @@ int main(){
             break;
         case 3:
             testMethod(arr, n, 3);
+            break;
+        case 4:
+            testMethod(arr, n, 4);
             break;
 
     }
@@ -101,7 +108,7 @@ void selectionSort(int arr[], int n){
     }
 }
 
-// Here's the implementation of Selection Sort in C
+// Here's the implementation of Insertion Sort in C
 void insertionSort(int arr[], int n){
     int i;
     int j;
@@ -115,6 +122,60 @@ void insertionSort(int arr[], int n){
         arr[j] = tmp;
         
     }
+}
+
+
+void mergeSort(int arr[], int first, int last){
+    if(first == last){
+        return;
+    }
+
+    int middle = floor((first+last) / 2);
+
+    mergeSort(arr, first, middle);
+    mergeSort(arr, middle+1, last);
+    merge(arr, first, middle, last);
+}
+
+
+// Here's the implementation of Merge Sort in C
+void merge(int arr[], int first, int middle, int last){
+    int *tmp;
+    int i;
+    int left = first;
+    int right = middle + 1;
+    int tmp_len = last - first + 1;
+    tmp = (int *) malloc(tmp_len * sizeof(int));
+
+    if(tmp != NULL){
+        for(i = 0; i < tmp_len; i++){
+            if((left <= middle) && (right <= last)){
+                if(arr[left] < arr[right]){
+                    tmp[i] = arr[left];
+                    left++;
+                }
+                else{
+                    tmp[i] = arr[right];
+                    right++;
+                }
+            }
+            else{
+                if(left > middle){
+                    tmp[i] = arr[right];
+                    right++;
+                }
+                else{
+                    tmp[i] = arr[left];
+                    left++;
+                }
+            }
+        }
+        for(int j = 0, i = first; j < tmp_len; j++, i++){
+            arr[i] = tmp[j];
+        }
+    }
+
+    free(tmp);
 }
 
 
@@ -153,6 +214,17 @@ void testMethod(int arr[], int n, int method){
         clock_t CPU_time_end = clock();
 
         printf("\nInsertion Sorted Array:\n");
+        for(i = 0; i < n; i++){
+            printf("%d ", arr[i]);
+        }
+        // printf("\nt = %lf s\n",((double) (CPU_time_end - CPU_time_start)) / CLOCKS_PER_SEC);
+    }
+    else if(method == 4){
+        clock_t CPU_time_start = clock();
+        mergeSort(arr, 0, n-1);
+        clock_t CPU_time_end = clock();
+
+        printf("\nMergeSorted Array:\n");
         for(i = 0; i < n; i++){
             printf("%d ", arr[i]);
         }
