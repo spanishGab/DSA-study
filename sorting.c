@@ -10,6 +10,8 @@ void selectionSort(int [], int n);
 void insertionSort(int [], int n);
 void merge(int [], int first, int middle, int last);
 void mergeSort(int [], int first, int last);
+int partition(int [], int first, int last);
+void quickSort(int [], int first, int last);
 
 int main(){
     srand(time(0));
@@ -24,6 +26,7 @@ int main(){
     printf("2 -> Selection Sort\n");
     printf("3 -> Insertion Sort\n");
     printf("4 -> Merge Sort\n");
+    printf("5 -> Quick Sort\n");
     scanf("%d", &method);
 
     int * arr;
@@ -48,6 +51,8 @@ int main(){
         case 4:
             testMethod(arr, n, 4);
             break;
+        case 5:
+            testMethod(arr, n, 5);
 
     }
     
@@ -179,6 +184,43 @@ void merge(int arr[], int first, int middle, int last){
 }
 
 
+// Here's the implementation of Quick Sort in C
+int partition(int arr[], int first, int last){
+    int left = first;
+    int right = last;
+    int tmp;
+    int pivot = arr[first];
+
+    while(left < right){
+        while(arr[left] <= pivot){
+            left++;
+        }
+        while(arr[right] > pivot){
+            right--;
+        }
+        if(left < right){
+            tmp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = tmp;
+        }
+    }
+    arr[first] = arr[right];
+    arr[right] = pivot;
+
+    return right;
+}
+
+
+void quickSort(int arr[], int first, int last){
+    if(first < last){
+        int pivot = partition(arr, first, last);
+        quickSort(arr, first, pivot-1);
+        quickSort(arr, pivot+1, last);
+    }
+}
+
+
+
 void testMethod(int arr[], int n, int method){
     time_t start_t, end_t;
     double time_taken;
@@ -224,13 +266,23 @@ void testMethod(int arr[], int n, int method){
         mergeSort(arr, 0, n-1);
         clock_t CPU_time_end = clock();
 
-        printf("\nMergeSorted Array:\n");
+        printf("\nMerge Sorted Array:\n");
+        for(i = 0; i < n; i++){
+            printf("%d ", arr[i]);
+        }
+        printf("\nt = %lf s\n",((double) (CPU_time_end - CPU_time_start)) / CLOCKS_PER_SEC);
+    }
+    else if(method == 5){
+        clock_t CPU_time_start = clock();
+        quickSort(arr, 0, n-1);
+        clock_t CPU_time_end = clock();
+
+        printf("\nQuick Sorted Array:\n");
         for(i = 0; i < n; i++){
             printf("%d ", arr[i]);
         }
         // printf("\nt = %lf s\n",((double) (CPU_time_end - CPU_time_start)) / CLOCKS_PER_SEC);
     }
-    
     
     printf("\n");
 }
