@@ -132,9 +132,9 @@ void insertionSort(int arr[], int n){
 ![Insertion Sort](img/InsertionSort.png)
 
 
-# Merge Sort
+## Merge Sort
 
-Merge Sort algorithm uses the [Divide and Conquer](https://www.programiz.com/dsa/divide-and-conquer) strategy to sort elements. It is based on recursion also. These two things united are the power of Merge Sort. Basically what the algorithm does is to divide the array until all the elements get isolated, this means that there is only one element left in the sub-array (that's the base case of the recursion). When it has the elements divided at this level, it begins to _merge_ the sub-arrays created in the past levels.
+Merge Sort algorithm uses the [Divide and Conquer](https://www.programiz.com/dsa/divide-and-conquer) strategy to sort elements. It is based on Recursion also. These two things united are the power of Merge Sort. Basically what the algorithm does is to divide the array until all the elements get isolated, this means that there is only one element left in the sub-array (that's the base case of the recursion). When it has the elements divided at this level, it begins to _merge_ the sub-arrays created in the past levels.
 
 The algorithm uses two functions: mergeSort() and merge():
 
@@ -148,7 +148,7 @@ It works with a loop that iterates over the temporary array. Inside the loop, th
 
 This is a fast algorithm, especially when it treats large amounts of data. Its negative points are that it uses recursion and creates a temporary array during the sort process.
 
-> In terms of performance:
+> In terms of time performance:
 >    * Better case: O(N log(N))
 >    * Average case: O(N log(N))
 >    * Worst case: O(N log(N))
@@ -211,6 +211,34 @@ void merge(int arr[], int first, int middle, int last){
 
 ### Let's see an example of an ascending ordination:</br>
 ![MergeSort](img/MergeSort.png)
+
+
+## Quick Sort
+
+Quick sort (so as Merge Sort does) uses the [Divide and Conquer](https://www.programiz.com/dsa/divide-and-conquer) and the Recursion strategies to sort elements. The main idea in Quick Sort is that it picks up an element as the _pivot_, based on it, it divides the array into two parts. After that, the array is sorted by the _partition_ function where the elements put at the left side of the _pivot_ are smaller than it, and the ones put at the right side of it are bigger than it. 
+
+There are to functions we need to build the Quick Sort algrithm:
+
+### quickSort()
+This function is on to call the _partition_ function and then call itself passing the split main array as an argument: the first call uses the elements before the _pivot_, and the second one uses the ones after the _pivot_ (never including the pivot).
+
+### partition()
+Partition is the function that chooses the _pivot element_, this can be done in many ways, but the most common ones are to take the array's first or last element (in my implementation I chose the first one). Based on the _pivot_, the _partition()_ function iterates over the sub-array (which is indicated by the _first_ and the _last_ positions) passed as an argument. 
+
+There is the main loop, which checks if the _left_ index is smaller than the _right_ index. Inside the main loop, there are two more loops: the first one checks if the elements at the _left_ side of the array are smaller than or equal to the _pivot_, while this condition is true the loop increases the _left_ index; the second loop checks if the elements at the right side of the array are bigger than the _pivot_, while this condition is true the loop decreases the _right_ index. When these loops are over, there is an if statement to check if the _left_ index is smaller than the _right_ index, if this condition is true, the elements at the _left_ and the _right_ positions are swapped because they are at the wrong side. 
+
+At the end of the main loop, the _pivot_ is put in the _right_ index position (because the _right_ index indicates the last smaller element than the pivot) and the _right-index's element goes to the pivot (first element) position, then the _right_ index is returned as the pivot's index.
+
+__Note: the _partition_ function doesn't sort the array, it just recombines the elements in such a way that the elements put at the left side of the _pivot_ are smaller than it, and the ones put at the right side of it are bigger than it. The array is sorted by the recursive call of the method, which calls itself until there's only one element left at each sub-part. At this point, the array is sorted.__
+
+Unlike Merge Sort, Quick Sort does not need to create a temporary array to store the sorted parts of the main array, it does that _in place_, which is why Quick Sort is considered better than Merge sort in terms of __Memory efficiency__.
+
+> In terms of time performance:
+>    * Better case: O(N log(N))
+>    * Average case: O(N log(N))
+>    * Worst case: O(N²)
+
+
 
 
 ## References:
