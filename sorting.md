@@ -5,7 +5,7 @@ The sorting algorithms are a very interesting part of the Data Structures and Al
 
 ## Bubble Sort
 
-The Bubble Sort is an _exchanging_ algorithm. In Bubble Sort, the ordination happens as the __algorithm iterates through the array comparing the adjacent elements, if the current is in the incorrect position, it must swap with the next one__, else, the loop goes to the following comparison. This __procedure finishes when there are no more elements to swap__ it means that the array has been sorted.
+The Bubble Sort is an _exchanging_ algorithm. In Bubble Sort, the ordination happens as the __algorithm iterates through the array comparing the adjacent elements, if the current one is in the incorrect position, it must swap with the next one__, else, the loop goes to the following comparison. This __procedure finishes when there are no more elements to swap__ it means that the array has been sorted.
 
 The process happens with __two loops__: the first one controls if there is still swap to make; the other one makes the comparisons between the elements. In each iteration, __the biggest one goes to its right position__ as if it was "floating" like a bubble, which is why the algorithm's name is Bubble Sort.
 
@@ -30,7 +30,7 @@ void bubbleSort(int arr[], int n){
         last_comp = 0;
         // loop to make the comparisons between the adjacent elements
         for(i = 0; i < end-1; i++){
-            // the actual comparison (to make it in descending order change '>' to '<')
+            // comparing the elements
             if(arr[i] > arr[i+1]){
                 // swaping positions
                 tmp = arr[i];
@@ -51,7 +51,7 @@ void bubbleSort(int arr[], int n){
 
 ## Selection Sort
 
-The Selection Sort is a _selection_ algorithm. In Selection Sort, __the premise is: the algorithm takes the first element of the array and compares it with all the other that follow when it finds the smallest element, it swaps them,  if it does not find a smaller one it keeps the same starting array order__. Then it goes to the next iteration and does the same thing with the second element. __The process finishes when the penultimate reaches and compared with the last one.__
+The Selection Sort is a _selection_ algorithm. In Selection Sort, __the premise is: the algorithm takes the first element of the array and compares it with all the others that follow when it finds the smallest element, it swaps them,  if it does not find a smaller one it keeps the same starting array order__. Then it goes to the next iteration and does the same thing with the second element. __The process finishes when the penultimate reaches and is compared with the last one.__
 
 The process uses __two loops__, the first one iterates over all the elements in the array, marking the current element's position as the position of the minimum element; the second one checks if this element is bigger than the following ones in the array. __When it finds a smaller one, it stores its position as the minimum's position and keeps doing this process until it reaches the last array's element. When it reaches the last one, it checks if the minimum's position is different from the starting position stored. If so, it swaps the element in the starting position with the one in the minimum's position.__
 
@@ -70,14 +70,15 @@ void selectionSort(int arr[], int n){
     int min_pos;
     int tmp;
 
-    // loop to mark the current element position
+    // loop that marks the current element position
     for(i = 0; i < n-1; i++){
         // assuming that the current element is the minimum element of the sequence
         min_pos = i;
-        // loop to make the comparisons between the current element and the other elements
+        // loop that makes the comparisons between the current and the other elements
         for(j = i+1; j < n; j++){ 
-            // checks if the current element if smaller than the following ones
+            // checks if the current element if bigger than one of the following ones
             if(arr[j] < arr[min_pos]){
+                // changing the min's position to the smallest element found
                 min_pos = j;
             }
         }
@@ -101,7 +102,7 @@ The Insertion Sort method works with the _insertion_ of elements. A good and com
 
 Insertion Sort algorithm works __separating the array into two parts__: the __first__ part is the __sorted sub-array__, the __second__ one is the __unsorted sub-array__. It walks through the array and __checks if the current element is smaller than the ones on its left-hand side (the sorted sub-array).__
 
-In Insertion Sort, we have __two loops__: the first one marks the current element; __the second one iterates over the sorted sub-array while it finds elements that are smaller than the current one.__ When this situation happens, __the elements that are bigger than the current one walk one position ahead until the current one finds someone smaller than it, thus it goes to the place ahead of this element, and the next iteration comes in.__
+In Insertion Sort, we have __two loops__: the first one marks the current element; __the second one iterates over the sorted sub-array while it finds elements that are bigger than the current one. These elements walk one position ahead until the current one finds someone smaller than it, thus it goes to the place ahead of this element, and the next iteration comes in.__
 
 This algorithm is not efficient for a large amount of data, though, it is faster than the Selection Sort.
 
@@ -118,12 +119,16 @@ void insertionSort(int arr[], int n){
     int j;
     int tmp;
 
+    // main loop, it marks the current element
     for(i = 1; i < n; i++){
         tmp = arr[i];   
-        for(j = i; (j > 0) && (tmp < arr[j-1]); j--){    
+        // second loop, it moves the elements bigger than the current one, jumping one position ahead 
+        for(j = i; (j > 0) && (tmp < arr[j-1]); j--){ 
             arr[j] = arr[j-1];
         }
+        // finaly the current is inserted on the right place
         arr[j] = tmp;
+        
     }
 }
 ```
@@ -134,17 +139,17 @@ void insertionSort(int arr[], int n){
 
 ## Merge Sort
 
-Merge Sort algorithm uses the [Divide and Conquer](https://www.programiz.com/dsa/divide-and-conquer) strategy to sort elements. It is based on Recursion also. These two things united are the power of Merge Sort. Basically what the algorithm does is to divide the array until all the elements get isolated, this means that there is only one element left in the sub-array (that's the base case of the recursion). When it has the elements divided at this level, it begins to _merge_ the sub-arrays created in the past levels.
+Merge Sort algorithm uses the __[Divide and Conquer](https://www.programiz.com/dsa/divide-and-conquer) strategy__ to sort elements. It is based on __Recursion__ also. These two things united are the power of Merge Sort. Basically what the algorithm does is to __divide the array until all the elements get isolated__, this means that there is only one element left in the sub-array __(that's the base case of the recursion)__. When it has the elements divided at this level, it begins to _merge_ the sub-arrays created in the past levels.
 
 The algorithm uses two functions: mergeSort() and merge():
 
 ### mergeSort():
-This function is responsible to divide the array into two parts: left and right, to do this, it calculates the _middle_ of the array and calls itself again two times, the first one passing as arguments the array, and the _left part_ indicators, and the second one passing as arguments the array, and the _right part_ indicators. When the base case is reached, the function returns. In the end, it calls the merge() function, which sorts the array.
+This function is responsible to divide the array into __two parts__: __left__ and __right__, to do this, it calculates the _middle_ of the array and calls itself again two times, the first one passing as arguments the array, and the _left part_ indicators, and the second one passing as arguments the array, and the _right part_ indicators. When the base case is reached, the function returns. In the end, it calls the merge() function, which sorts the array.
 
 ### merge(): 
-This function is responsible for sorting the array passed as an argument. To do that, it uses the _first_, the _middle_, and the _last_ position indicators passed as arguments. It creates the _left_ and _right_ references and a temporary array that will store the sorted values and then will override the main array with its values.
+This function is responsible for sorting the array passed as an argument. To do that, it uses the _first_, the _middle_, and the _last_ position indicators passed as arguments. It creates the _left_ and _right_ references and a __temporary array__ that will store the sorted values and then will override the main array with its values.
 
-It works with a loop that iterates over the temporary array. Inside the loop, the first thing it does is to check if there still have any element in both _left_ and _right_ sub-arrays, if so, it compares the current element in the _left_ side with the one in the _right_ side and puts the smallest one in the temporary array. If one of the arrays has no more elements to compare, then it gets the elements in the one which still has and puts them into the temporary array, because these remaining elements are already sorted. In the end, the function copies the temporary array into the main array.
+It works with a loop that iterates over the temporary array. Inside the loop, the __first thing it does is to check if there still have any element in both _left_ and _right_ sub-arrays__, if so, __it compares the current element in the _left_ side with the one in the _right_ side and puts the smallest one in the temporary array. If one of the arrays has no more elements to compare, then it gets the elements in the one which still has and puts them into the temporary array__ (because these remaining elements are already sorted). In the end, the function copies the temporary array into the main array.
 
 This is a fast algorithm, especially when it treats large amounts of data. Its negative points are that it uses recursion and creates a temporary array during the sort process.
 
@@ -156,14 +161,19 @@ This is a fast algorithm, especially when it treats large amounts of data. Its n
 Down below is the implementation of the Merge Sort algorithm in C
 ```
 void mergeSort(int arr[], int first, int last){
+    // checks if there's only one element
     if(first == last){
         return;
     }
 
+    // calculates the middle
     int middle = floor((first+last) / 2);
 
+    // calling merge sort for the left part of the array
     mergeSort(arr, first, middle);
+    // calling merge sort for the right part of the array
     mergeSort(arr, middle+1, last);
+    // merging the results
     merge(arr, first, middle, last);
 }
 
@@ -174,20 +184,28 @@ void merge(int arr[], int first, int middle, int last){
     int left = first;
     int right = middle + 1;
     int tmp_len = last - first + 1;
+
+    // creating the temporary array dynamically
     tmp = (int *) malloc(tmp_len * sizeof(int));
 
     if(tmp != NULL){
+        // main loop, iterates over the temporary array
         for(i = 0; i < tmp_len; i++){
+            // checking if both sub-arrays still have elements
             if((left <= middle) && (right <= last)){
+                // comparing the current element at the left sub-array with the current one at right sub-array
                 if(arr[left] < arr[right]){
+                    // placing the left current element in the temporary array
                     tmp[i] = arr[left];
                     left++;
                 }
                 else{
+                    // placing the right current element in the temporary array
                     tmp[i] = arr[right];
                     right++;
                 }
             }
+            // if there's no more elements in some of the sub-arrays, put the remaining ones into the temporary array
             else{
                 if(left > middle){
                     tmp[i] = arr[right];
@@ -199,14 +217,15 @@ void merge(int arr[], int first, int middle, int last){
                 }
             }
         }
+        // copying the temporary array into the main array
         for(int j = 0, i = first; j < tmp_len; j++, i++){
             arr[i] = tmp[j];
         }
     }
 
+    // releasing the temporary array's dynamically allocated space
     free(tmp);
 }
-
 ```
 
 ### Let's see an example of an ascending ordination:</br>
@@ -215,21 +234,21 @@ void merge(int arr[], int first, int middle, int last){
 
 ## Quick Sort
 
-Quick sort (so as Merge Sort does) uses the [Divide and Conquer](https://www.programiz.com/dsa/divide-and-conquer) and the Recursion strategies to sort elements. The main idea in Quick Sort is that it picks up an element as the _pivot_, based on it, it divides the array into two parts. After that, the array is sorted by the _partition_ function where the elements put at the left side of the _pivot_ are smaller than it, and the ones put at the right side of it are bigger than it. 
+Quick sort uses the __[Divide and Conquer](https://www.programiz.com/dsa/divide-and-conquer) and the Recursion strategies__ to sort elements. The main idea in Quick Sort is that it picks up an element as the _pivot_, based on it, it __divides the array into two parts__. After that, the array is sorted by the _partition_ function where the elements put at the __left side of the _pivot_ are smaller than it, and the ones put at the right side of it are bigger than it.__ The __base case__ of the recursion in Quick Sort is when there's only one element left in the array passed as an argument.
 
-There are to functions we need to build the Quick Sort algrithm:
+There are two functions we need to build the Quick Sort algrithm:
 
 ### quickSort()
-This function is on to call the _partition_ function and then call itself passing the split main array as an argument: the first call uses the elements before the _pivot_, and the second one uses the ones after the _pivot_ (never including the pivot).
+This function is on to call the _partition_ function and then call itself passing the split main array as an argument: __the first call uses the elements before the _pivot_, and the second one uses the ones after the _pivot_ (never including the pivot).__
 
 ### partition()
-Partition is the function that chooses the _pivot element_, this can be done in many ways, but the most common ones are to take the array's first or last element (in my implementation I chose the first one). Based on the _pivot_, the _partition()_ function iterates over the sub-array (which is indicated by the _first_ and the _last_ positions) passed as an argument. 
+Partition is the function that chooses the _pivot element_, this can be done in many ways, but the most common ones are to __take the array's first or last element (in my implementation I chose the first one).__ Based on the _pivot_, the _partition()_ function iterates over the sub-array (which is indicated by the _first_ and the _last_ positions) passed as an argument. 
 
-There is the main loop, which checks if the _left_ index is smaller than the _right_ index. Inside the main loop, there are two more loops: the first one checks if the elements at the _left_ side of the array are smaller than or equal to the _pivot_, while this condition is true the loop increases the _left_ index; the second loop checks if the elements at the right side of the array are bigger than the _pivot_, while this condition is true the loop decreases the _right_ index. When these loops are over, there is an if statement to check if the _left_ index is smaller than the _right_ index, if this condition is true, the elements at the _left_ and the _right_ positions are swapped because they are at the wrong side. 
+There is the main loop, which checks if the _left_ index is smaller than the _right_ index. Inside the main loop, there are two more loops: the first one __checks if the elements at the _left_ side of the array are smaller than or equal to the _pivot_, while this condition is true the loop increases the _left_ index;__ the second loop __checks if the elements at the right side of the array are bigger than the _pivot_, while this condition is true the loop decreases the _right_ index.__ When these loops are over, there is an _if_ statement to check if the _left_ index is smaller than the _right_ index, if this condition is true, __the elements at the _left_ and the _right_ positions are swapped because they are at the wrong side.__
 
-At the end of the main loop, the _pivot_ is put in the _right_ index position (because the _right_ index indicates the last smaller element than the pivot) and the _right-index's element goes to the pivot (first element) position, then the _right_ index is returned as the pivot's index.
+At the end of the main loop, __the _pivot_ goes to the _right_ index position (because the _right_ index indicates the last element smaller than the pivot) and the right-index's element goes to the pivot (first element) position,__ then the _right_ index is returned as the pivot's index.
 
-__Note: the _partition_ function doesn't sort the array, it just recombines the elements in such a way that the elements put at the left side of the _pivot_ are smaller than it, and the ones put at the right side of it are bigger than it. The array is sorted by the recursive call of the method, which calls itself until there's only one element left at each sub-part. At this point, the array is sorted.__
+> Note: the _partition_ function doesn't sort the array, it just recombines the elements in such a way that the elements put at the left side of the _pivot_ are smaller than it, and the ones put at the right side of it are bigger than it. The array is sorted by the recursive call of the method, which calls itself until there's only one element left at each sub-part. At this point, the array is sorted.
 
 Unlike Merge Sort, Quick Sort does not need to create a temporary array to store the sorted parts of the main array, it does that _in place_, which is why Quick Sort is considered better than Merge sort in terms of __Memory efficiency__.
 
@@ -238,8 +257,54 @@ Unlike Merge Sort, Quick Sort does not need to create a temporary array to store
 >    * Average case: O(N log(N))
 >    * Worst case: O(N²)
 
+Down below is the implementation of the Quick Sort algorithm in C
+```
+void quickSort(int arr[], int first, int last){
+    // checking if there is more than one element in the array
+    if(first < last){
+        // calling the partition function and calculating the pivot element
+        int pivot = partition(arr, first, last);
+        // calling quickSort to the left part of the array
+        quickSort(arr, first, pivot-1);
+        // calling quickSort to the right part of the array
+        quickSort(arr, pivot+1, last);
+    }
+}
 
+int partition(int arr[], int first, int last){
+    int left = first;
+    int right = last;
+    int tmp;
+    int pivot = arr[first];
 
+    // checking if left index still smaller than the right index
+    while(left < right){
+        // while the current left element is smaller than or equal to the pivot it increases the left index
+        while(arr[left] <= pivot){
+            left++;
+        }
+        // while the current right element is bigger than pivot it decreases the right index
+        while(arr[right] > pivot){
+            right--;
+        }
+        // checking if left index still smaller than the right index
+        if(left < right){
+            // swapping elements
+            tmp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = tmp;
+        }
+    }
+    // in the end, the right index element goes to the pivot position and the pivot element goes to the right index
+    arr[first] = arr[right];
+    arr[right] = pivot;
+
+    return right;
+}
+```
+
+### Let's see an example of an ascending ordination:</br>
+![Quick Sort](img/QuickSort.png)
 
 ## References:
 
