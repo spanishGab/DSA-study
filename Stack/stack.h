@@ -16,7 +16,7 @@ bool is_empty(stack*);
 void push(stack*, int);
 int pop(stack*);
 int last_item(stack* stk);
-int length(stack* stk);
 void print_stack(stack* stk);
+int length(stack* stk);
 
 #endif
