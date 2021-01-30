@@ -26,7 +26,7 @@ int main(){
         switch (op){
             case 1:
                 if (is_full(stk)){
-                    printf("\nThe Stack is full, can't put any more item!\n\n");
+                    printf("\nThe Stack is full, can't put any more item on it!\n\n");
                 }
                 else{
                     printf("Type the new item: ");

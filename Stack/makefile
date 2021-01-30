@@ -4,7 +4,7 @@ stack_test: stack.o stack_test.o
 stack.o: stack.c stack.h
 	gcc -c stack.c
 
-stack_test.o: stack.c stack.h
+stack_test.o: stack_test.c stack.c stack.h
 	gcc -c stack_test.c
 
 clean: 

@@ -1,7 +1,7 @@
 #ifndef STACK_H
 #define STACK_H
 
-#define FULL_SIZE 1000
+#define FULL_SIZE 10
 
 struct stack {
     int* items;
