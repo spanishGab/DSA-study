@@ -65,6 +65,7 @@ int main(){
                 break;       
         }
     }
+    free(stk);
 
     return 0;
 }

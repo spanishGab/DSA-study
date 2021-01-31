@@ -314,4 +314,4 @@ int partition(int arr[], int first, int last){
 [Linguagem C Descomplicada](https://programacaodescomplicada.wordpress.com/indice/estrutura-de-dados/)</br>
 [FACE Prep](https://www.faceprep.in/c/sorting-algorithms/)
 
-> Note: The links referenced in this article were accessed on 2021-01-10 22:05:00 by the last time. All explanations were prepared by the author himself, using as a basis the texts contained in the referred links.
+> Note: The links referenced in this article were accessed on 2021-01-10 22:05:00 by the last time. All explanations and images used were prepared by the author himself, using as a basis the texts contained in the referred links.
